@@ -10,4 +10,4 @@ from bugzot.views import IndexView
 app.add_url_rule('/', view_func=IndexView.as_view('index_view'))
 
 # Migrate the database
-db.create_all()
+# db.create_all()

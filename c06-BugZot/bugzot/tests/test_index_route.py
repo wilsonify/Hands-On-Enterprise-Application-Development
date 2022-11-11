@@ -4,12 +4,9 @@ Description: Test the index application route
 '''
 import os
 import pytest
-import sys
 import tempfile
-
-sys.path.append('.')
-
 import bugzot
+
 
 @pytest.fixture(scope='module')
 def client():
@@ -19,15 +16,14 @@ def client():
 
     with bugzot.app.app_context():
         bugzot.db.create_all()
+        yield client
 
-    yield client
-    
     os.close(db_fd)
     os.unlink(bugzot.app.config['DATABASE'])
 
+
 def test_index_endpoint(client):
-
-    res = client.get("/")
-    dir(res)
-    assert res.status_code == 200
-
+    with bugzot.app.app_context():
+        res = client.get("/")
+        dir(res)
+        assert res.status_code == 200
