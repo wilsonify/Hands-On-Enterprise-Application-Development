@@ -1,0 +1,10 @@
+<table>
+    {% for user in users %}
+    <tr>
+        <td class="user-data-column">{{ user.username }}</td>
+        <td class="user-data-column">{{ user.email }}</td>
+        <td class="user-data-column">{{ user.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('admin_user_list', next_page) }}">Next Page</a>
